@@ -86,6 +86,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'AVPL.wsgi.application'
 
 
+
+CSRF_TRUSTED_ORIGINS = [
+    # 'your-admin-domain.com',
+    'https://sturdy-space-eureka-977xx99rxjq9cqgw-8081.app.github.dev',
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
