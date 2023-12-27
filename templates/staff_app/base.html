@@ -112,13 +112,16 @@
                      <li><a class="nav-link" href="/staffs/dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a></li>
                      
                      <li class="menu-header">Features</li>
-                    
+
+                     {% if user|check_permission:'view_productcategory' %}
                      <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fa fa-shopping-cart"></i><span>Product Categories</span></a>
+                       
+                        <a href="#" class="nav-link has-dropdown">
+                           <i class="fa fa-shopping-cart"></i><span>Product Categories</span></a>
                         <ul class="dropdown-menu">
-                           {% if user|check_permission:'view_productcategory' %}
+                          
                            <li><a class="nav-link" href="/staffs/productcategories">Categories</a></li>
-                           {% endif %}
+                          
                            {% if user|check_permission:'view_productsubcategory' %}
                            <li><a class="nav-link" href="/staffs/productsubcategories">Sub-Categories</a></li>
                            {% endif %}
@@ -128,9 +131,9 @@
                           
                         </ul>
                      </li>
-                   
+                     {% endif %}
                     
-                     
+                     {% if user|check_permission:'view_vendor' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-shopping-basket "></i><span>Vendors</span></a>
                         <ul class="dropdown-menu">
@@ -152,7 +155,7 @@
                         </ul>
                       
                      </li>
-                  
+                     {% endif %}
 
                      {% if request.user.is_superuser %}
                      <li class="dropdown">
@@ -173,13 +176,13 @@
                      {% endif %}
 
                       
-                   
+                     {% if user|check_permission:'view_level_settings' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-sitemap"></i><span>Set PV %</span></a>
                         <ul class="dropdown-menu">
-                           {% if user|check_permission:'view_level_settings' %}
+                          
                            <li><a class="nav-link" href="/staffs/settings/">Level Settings</a></li>
-                           {% endif %}
+                          
                            {% if user|check_permission:'view_pvtransactions' %}
                            <li><a class="nav-link" data-toggle="modal" data-target="#pvmodel" href="#">Set PV On Categories</a></li>
                            <li><a class="nav-link" href="/staffs/setpvpair">Set PV For One Pair</a></li>
@@ -195,20 +198,21 @@
 
                         </ul>
                      </li>
-                    
+                     {% endif %}
         
-                     
+                     {% if user|check_permission:'view_uservendorcommission' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-sitemap"></i><span>User Vendor Commisionn</span></a>
                         <ul class="dropdown-menu">
-                           {% if user|check_permission:'view_uservendorcommission' %}
+                         
                            <li><a class="nav-link" href="/staffs/uservendorcommission">Set User Commision</a></li>
-                           {% endif %}
+                         
                         </ul>
                      </li>
+                     {% endif %}
                    
 
-                     
+                     {% if user|check_permission:'view_usersubscription' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-credit-card-alt"></i><span>Subscription Pack</span></a>
                         <ul class="dropdown-menu">
@@ -224,8 +228,9 @@
                         </ul>
                         
                      </li>
+                     {% endif %}
                  
-                  
+                     {% if user|check_permission:'view_orders' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-shopping-bag"></i><span>Orders</span></a>
                         <ul class="dropdown-menu">
@@ -241,9 +246,9 @@
                         </ul>
                      </li>
 
-                  
+                     {% endif %}
 
-                  
+                     {% if user|check_permission:'view_wallettransfer' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-money"></i><span>Payments</span></a>
                         <ul class="dropdown-menu">
@@ -264,10 +269,12 @@
                         
                         </ul>
                      </li>
-
+                     {% endif %}
                    
 
-                    
+                     {% if user|check_permission:'view_tds_log' %} 
+                 
+                     {% elif user|check_permission:'view_tds_log' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-money"></i><span>Taxation</span></a>
                         <ul class="dropdown-menu">
@@ -279,10 +286,11 @@
                            {% endif %}
                      </ul>
                      </li>
-
+               
+                     {% endif %}
                  
 
-                   
+                     {% if user|check_permission:'view_aboutus' %}
                      <li class="dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fa fa-cogs"></i><span>Website Management</span></a>
                         <ul class="dropdown-menu">
@@ -311,6 +319,7 @@
                         </ul>
                      </li>
                     
+                     {% endif %}
                
                      {% if user|check_permission:'view_user' %}
                         <li><a onclick="subscription_request();" class="nav-link" href="/staffs/users"><i class="fa fa-question-circle "></i><span>Users</span></a></li>
