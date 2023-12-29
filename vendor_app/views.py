@@ -941,6 +941,8 @@ def vendor_withdraw(request):
 		dic = {
 			'vendor':vendor,
 			'wallet':Wallet.objects.get(user=request.user),
+			'business_limit_wallet':BusinessLimit.objects.get(vendor=request.user.vendor),
+			'commission_wallet':Vendor_Wallet_Commission.objects.get(user=request.user),
 			'data':VendorWithdrawRequest.objects.filter(user=request.user),
 			'notification':get_notifications(request.user),
 			'notification_len':len(Notification.objects.filter(user=request.user, read=False)),
@@ -1198,7 +1200,7 @@ def vendorbalanacetransfer(request):
 
 			print(id.id,'idddd')
 
-	if WalletTransferApproval.objects.get(id =id.id).vendor == 1:
+	if WalletTransferApproval.objects.get(id =id.id).vendor == 1 :
 
 		if request.method == 'POST':
 			print(request.user)

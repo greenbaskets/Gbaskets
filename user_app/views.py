@@ -169,7 +169,7 @@ def direct_referal(request):
 		for i in mlm:
 			if UserData.objects.filter(user__username=i):
 				referal_pv = referal_pv + UserData.objects.get(user__username=i).pv
-		redeem_amount = referal_pv*(DirectReferalCommission.objects.all()[0].percentage/100)
+		redeem_amount = referal_pv*(DirectReferalCommission.objects.all()[0].percentage/100 if DirectReferalCommission.objects.all() else 0 )
 		dic = {
 			'mlm':MLM.objects.filter(parent=request.user),
 			'user_data':user_data,
@@ -1109,14 +1109,14 @@ def user_withdraw(request):
 			if flag:
 				tds = ((amount/100)*5)
 				credited_amount = amount - tds
-				UserWithdrawRequest.objects.create(
+				withdraw=UserWithdrawRequest.objects.create(
 					user = request.user,
 					request_date = timezone.now(),
 					amount = amount,
 					credited_amount = credited_amount,
 					tds = tds
 				)
-			
+				make_wallet_transaction(withdraw.user, (withdraw.amount), 'DEBIT')
 				messages.success(request, 'We have received your payment withdraw request. Your payment wil be credited in your account in 3 working days after approval.')
 				return redirect('/user/withdraw')
 			else:
@@ -1181,8 +1181,14 @@ def user_help(request):
 		if request.method == 'POST':
 			subject = request.POST.get('subject')
 			message = request.POST.get('message')
-			image = request.FILES['image']
-			Query.objects.create(user=request.user, query_date=timezone.now(), subject=subject, message=message,image=image)
+			if 'image' in request.FILES:
+				image = request.FILES['image']
+			else:
+				image=''
+			query_obj=Query.objects.create(user=request.user, query_date=timezone.now(), subject=subject, message=message)
+			if image:
+				query_obj.image=image
+			query_obj.save()
 			messages.success(request, 'Query Received')
 			user=User.objects.filter(username='admin').first()
 			print(user,'UUUUUU')

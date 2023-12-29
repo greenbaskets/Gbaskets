@@ -1031,18 +1031,28 @@ def admin_change_withdraw_status(request):
 				else:
 					current_tds = Total_TDS.objects.all()[0].current_total_tds + withdraw.tds
 					Total_TDS.objects.all().update(current_total_tds = current_tds)
-				make_wallet_transaction(withdraw.user, (withdraw.amount), 'DEBIT')
+				# make_wallet_transaction(withdraw.user, (withdraw.amount), 'DEBIT')
 				make_creditedmoney_transaction(withdraw.user, (withdraw.credited_amount), 'CREDIT')
 				notification(withdraw.user, 'Rs'+str(withdraw.amount)+' debited from your wallet.')
-			notification(withdraw.user, 'Withdraw Request Status Changed.')
+				notification(withdraw.user, 'Withdraw Request Status Changed.')
+			if status == '3':
+				make_wallet_transaction(withdraw.user, (withdraw.amount),'CREDIT')
+				notification(withdraw.user, 'Rs'+str(withdraw.amount)+' credit to your wallet.')
+				notification(withdraw.user, 'Withdraw Request Status Changed.')
+
 		elif type_ == 'v':
 			VendorWithdrawRequest.objects.filter(id=id_).update(is_active=status)
 			withdraw = VendorWithdrawRequest.objects.get(id=id_)
 			if status == '2':
-				make_wallet_transaction(withdraw.user, withdraw.amount, 'DEBIT')
+				# make_wallet_transaction(withdraw.user, withdraw.amount, 'DEBIT')
 				# make_creditedmoney_transaction(withdraw.user, (withdraw.credited_amount), 'CREDIT')
 				notification(withdraw.user, 'Rs'+str(withdraw.amount)+' debited from your wallet.')
-			notification(withdraw.user, 'Withdraw Request Status Changed.')
+				notification(withdraw.user, 'Withdraw Request Status Changed.')
+			if status == '3':
+				make_wallet_transaction(withdraw.user, (withdraw.amount),'CREDIT')
+				notification(withdraw.user, 'Rs'+str(withdraw.amount)+' credit to your wallet.')
+				notification(withdraw.user, 'Withdraw Request Status Changed.')
+
 		messages.success(request, 'Status Changed Successfully')
 		return redirect('/admins/withdraw')
 	else:
@@ -1082,24 +1092,32 @@ def admin_query_send_reply(request):
 	if check_user_authentication(request, 'Admin'):
 		if request.method =="POST":
 			img_data=request.POST.get('image')
-			format, imgstr = img_data.split(';base64,')
-			ext = format.split('/')[-1]
-			image_data = ContentFile(base64.b64decode(imgstr), name='reply_image.'+ext)
-			
+			if img_data:
+				format, imgstr = img_data.split(';base64,')
+				ext = format.split('/')[-1]
+				image_data = ContentFile(base64.b64decode(imgstr), name='reply_image.'+ext)
+			else:
+				image_data=''
 			q_data=Query.objects.get(id=request.POST.get('query'))
 			q_data.reply=request.POST.get('reply')
-			q_data.reply_image=image_data
+			if image_data:
+				q_data.reply_image=image_data
+
 			q_data.save()
 			
 			# update(
 			# 	reply=request.POST.get('reply'),reply_image=image_data
 			# )
 			query = Query.objects.get(id=request.POST.get('query'))
+			if query.reply_image :
+				image=query.reply_image
+			else:
+				image=''
 			if query.anonymous:
 				msg = '''Hi '''+query.name+''',
 
 	'''+query.reply+''' ,
-	'''+query.reply_image+'''
+	'''+image+'''
 
 	Thanks & Regards,
 	Team AVPL'''

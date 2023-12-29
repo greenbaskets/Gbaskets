@@ -75,7 +75,7 @@
                                                 <td><i class="fa fa-inr"></i> {{ x.credited_amount|safe  }}</td>
                                                 <td><i class="fa fa-inr"></i> {{ x.tds|safe }}</td>
                                                 {% if x.is_active == 0 %}
-                                                <td><span class="badge badge-primary">Received</span></td>
+                                                <td><span class="badge badge-primary">In-Progress</span></td>
                                                 {% endif %}
                                                 {% if x.is_active == 1 %}
                                                 <td><span class="badge badge-success">Approved</span></td>

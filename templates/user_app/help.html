@@ -73,6 +73,7 @@
                                                 <th>Message</th>
                                                 <th>Image/File</th>
                                                 <th>Reply from Admin</th>
+                                                <th>Reply Image/File</th>
                                                 <th>Status</th>
                                              </tr>
                                           </thead>
@@ -94,6 +95,13 @@
                                                 <td>No Reply</td>
                                                 {% else %}
                                                 <td>{{ x.reply|safe }}</td>
+                                                {% if x.reply_image %}
+                                                   <td> <a href="{{x.reply_image.url}}"target="_blank" >{{x.reply_image.url}}</a></td>
+                                                   {% else %}
+                                                   <td> </td>
+                                                   {% endif %}
+                                              
+                                               
                                                 {% endif %}
                                                 {% if x.status == 0 %}
                                                 <td><span class="badge badge-primary">Received</span></td>
