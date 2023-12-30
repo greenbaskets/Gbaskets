@@ -223,27 +223,13 @@ def admin_edit_product_category(request):
 			data = ProductCategory.objects.filter(id=id_).first()
 			print(data)
 			name = request.POST.get('name')
-			tax = request.POST.get('tax')
-			commission = request.POST.get('commission')
-			print('KKKKKKKKKKKKKKKK',name, tax)
 			image = request.FILES.get('image')
-			if name and tax is None and commission is None and image is None:
+			if name :
 				data.name = name
-				data.save()
-			if tax and name is None and commission is None and image is None:
-				data.tax = tax
-			if commission and tax is None and name is None and image is None:
-				data.commission = commission
-				data.save()
-			if image and tax is None and commission is None and name is None:
+			if image :
 				data.image = image
-				data.save()
-			else:
-				data.name = name
-				data.tax = tax
-				data.commission = commission
-				data.image = image
-				data.save()
+			data.save()
+   
 			dic = {
 			# 'data' : data,
 			'data':ProductCategory.objects.all(),

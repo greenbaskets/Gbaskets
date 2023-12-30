@@ -69,7 +69,6 @@
                                        <thead>
                                           <tr>
                                              <th>Name</th>
-                                             <th>Tax %</th>
                                              <th>Image</th>
                                              <th>Options</th>
                                           </tr>
@@ -78,7 +77,7 @@
                                           {% for x in data %}
                                           <tr>
                                              <td>{{ x.name|safe }}</td>
-                                             <td>{{ x.tax|safe }}%</td>
+                                           
                                              <td><img src="{{ x.image.url|safe }}" style="height:90px;width:120px;"></td>
                                              <td>
                                                 <a href="/admins/editproductcategory?id_={{ x.id|safe }}" class="btn btn-success btn-icon icon-left"><i class="far fa-edit"></i>Edit</a>&nbsp;

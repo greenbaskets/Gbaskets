@@ -72,7 +72,7 @@
                      <img alt="image" src="{{ request.user.vendor.store.storeimages.logo.url|safe }}" class="user-img-radious-style">
                      <span class="d-sm-none d-lg-inline-block"></span></a>
                      <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-title">Hello {{ request.user.vendor.first_name|safe }}</div>
+                        <div class="dropdown-title">Hello {{ request.user.vendor.first_name|safe }} {{ request.user.vendor.last_name|safe }}</div>
                         <a href="/vendor/profile" class="dropdown-item has-icon">
                         <i class="far fa-user"></i> Profile
                         </a>
@@ -88,7 +88,7 @@
                <aside id="sidebar-wrapper">
                   <div class="sidebar-brand">
                      <a href="/vendor/">
-                     <img alt="image" src="{{ request.user.vendor.store.storeimages.logo.url|safe }}" class="header-logo" />
+                     <img alt="image" src="{% static 'img/Vector.png' %}" class="header-logo" />
                      
                      </a>
                   </div>
@@ -99,8 +99,8 @@
                               <img src="{{ request.user.vendor.store.storeimages.logo.url|safe }}" class="profile-img-circle box-center" alt="User Image">
                            </div>
                            <div class="siderbar-profile-details">
-                              <div class="siderbar-profile-name">{{ request.user.vendor.first_name|safe }} {{ request.user.vendor.last_name|safe }}</div>
-                              <div class="siderbar-profile-position">{{ request.user.vendor.store.name|safe }}'s Vendor</div>
+                              <div class="siderbar-profile-name">{{ request.user.vendor.store.name|safe }}</div>
+                              {% comment %} <div class="siderbar-profile-position">{{ request.user.vendor.store.name|safe }}'s Vendor</div> {% endcomment %}
                            </div>
                            
                         </div>

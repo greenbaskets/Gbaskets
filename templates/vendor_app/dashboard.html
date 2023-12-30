@@ -38,33 +38,37 @@
                                 
 
                                     <div class="row">
+
                                        
                                        <div class="col-lg-3 col-md-12 col-sm-12">
-                                          <h4><i class="fa fa-dashcube"></i><a href="/vendor/wallet"> Current Balance </a></h4>( Wallet )
+                                          <h5><i class="fa fa-dashcube"></i><a href="/vendor/wallet"> Current Balance </a></h5>
+                                          <h5>( Wallet )</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
-                                          <h4><i class="fa fa-inr"></i> {{wallet.current_balance}}</h4>
+                                          <h5><i class="fa fa-inr"></i> {{wallet.current_balance|floatformat:2}}</h5>
                                           
                                        </div>
 
                                        <div class="col-lg-3 col-md-12 col-sm-12">
                                     
                                           {% if business_limit.current_balance > 0 %}
-                                          <h4><i class="fa fa-dashcube"></i><a href="/vendor/businesslimit"> Current Balance </a></h4>( Business Limit Wallet)
+                                          <h5><i class="fa fa-dashcube"></i><a href="/vendor/businesslimit"> Current Balance </a></h5>
+                                          <h5>( Business Limit Wallet)</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
-                                          <h4><i class="fa fa-inr"></i> {{business_limit.current_balance}}</h4>
+                                          <h5><i class="fa fa-inr"></i> {{business_limit.current_balance|floatformat:2}}</h5>
                                           {% else %}
-                                          <h4><i class="fa fa-dashcube"></i><a href="/vendor/businesslimit"> Current Balance </a></h4> ( Business Limit Wallet) 
+                                          <h5><i class="fa fa-dashcube"></i><a href="/vendor/businesslimit"> Current Balance </a></h5> ( Business Limit Wallet) 
                                           <span style="color:rgb(190, 4, 29);">** Not allow to order Delivered. Kindly recharge your Business Limit Wallet..</span>
                                           <hr style="border-width:5px;border-color:rgb(190, 4, 29);border-radius:20px;margin-bottm:10px;">
-                                          <h4><i class="fa fa-inr"></i> {{business_limit.current_balance}} </h4>
+                                          <h5><i class="fa fa-inr"></i> {{business_limit.current_balance|floatformat:2}} </h5>
                                           {% endif %}
                                           
                                        </div> 
                                        {% if wallet_commission.is_active == True %}
                                        <div class="col-lg-3 col-md-12 col-sm-12">
-                                          <h4><i class="fa fa-dashcube"></i><a href="/vendor/wallet-commission"> Current Balance </a></h4>( Wallet-Commission)
+                                          <h5><i class="fa fa-dashcube"></i><a href="/vendor/wallet-commission"> Current Balance </a></h5>
+                                          <h5>( Wallet-Commission)</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
-                                          <h4><i class="fa fa-inr"></i> {{wallet_commission.current_balance}}</h4>
+                                          <h5><i class="fa fa-inr"></i> {{wallet_commission.current_balance|floatformat:2}}</h5>
                                           
                                        </div>
                                        {% else %}
