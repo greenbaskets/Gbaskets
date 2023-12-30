@@ -1098,13 +1098,13 @@ def vendor_activate_subscription(request):
 		node = MLM.objects.get(node = obj.user)
 		if not node.parent.role.level.level == 'Admin':
 			save_pv_transaction2(node.parent, float(amount), 'Level')
-		sub = 'Online Apni Dukaan - Subscription Activated Successfully'
+		sub = 'Online Aap Ki Apni Dukaan - Subscription Activated Successfully'
 		msg = '''Hi '''+obj.user.usr.first_name+'''!
 
-You have successfully subscribed to Plus Membership of Online Apni Dukaan. Now you will get free delivery for 1 year. Enjoy shopping on onlineapnidukaan.com
+You have successfully subscribed to Plus Membership of Online Aap Ki Apni Dukaan. Now you will get free delivery for 1 year. Enjoy shopping on onlineapnidukaan.com
 
 Thanks & Regards,
-Team Online Apni Dukaan'''
+Team Online Aap Ki Apni Dukaan'''
 		EmailMessage(sub,msg,to=[obj.user.email]).send()
 		messages.success(request, 'User Subscription Activated Successfully !!!!')
 		notification(request.user, 'Vendor '+obj.vendor.first_name+' '+obj.vendor.last_name)
