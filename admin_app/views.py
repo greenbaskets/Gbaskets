@@ -95,6 +95,18 @@ def admin_dashboard(request):
 		# # Yearly_PV.objects.update(pv = pv_year)
 		# # print(pv_year<pv)
 		# pv = round(pv,2)
+
+		if len(Commission.objects.all()) == 0 :
+			Commission.objects.create()
+		if len(Savings.objects.all()) == 0 :
+			Savings.objects.create()
+        
+		if len(Current_PV.objects.all()) == 0 :
+			Current_PV.objects.create()
+
+		if len(Yearly_PV.objects.all()) == 0 :
+			Yearly_PV.objects.create()
+
 			
 		
 		dic = {
@@ -174,14 +186,12 @@ def admin_product_categories(request):
 	if check_user_authentication(request, 'Admin'):
 		if request.method == 'POST':
 			name = request.POST.get('name')
-			tax = request.POST.get('tax')
-			commission = request.POST.get('commission')
 			image = request.FILES['image']
 			if ProductCategory.objects.filter(name=name).exists():
 				messages.info(request, 'Product Category Already Exists')
 				return redirect('/admins/productcategories')
 			else:
-				ProductCategory.objects.create(name=name, tax=tax, image=image, commission=commission)
+				ProductCategory.objects.create(name=name,  image=image)
 				PointValue.objects.create(category=ProductCategory.objects.get(name=name))
 				messages.info(request, 'Product Category Added Successfully !!!!')
 				return redirect('/admins/productcategories')

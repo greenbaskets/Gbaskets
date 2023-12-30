@@ -36,25 +36,29 @@
                                     <div class="row">
                                        
                                        <div class="col-lg-3 col-md-12 col-sm-12">
-                                          <h4><i class="fa fa-dashcube"></i> Current Balance (Commission)</h4>
+                                          <h5><i class="fa fa-dashcube"></i> Current Balance</h5>
+                                          <h5>(Commission)</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
                                           <h5><i class="fa fa-inr"></i> {% for x in commission %}{{x.current_balance|floatformat:2}}{% endfor %}</h5>
                                           
                                        </div>
                                        <div class="col-lg-3 col-md-12 col-sm-12">
-                                          <h4><i class="fa fa-dashcube"></i> Savings Balance</h4>
+                                          <h5><i class="fa fa-dashcube"></i>Current Balance</h5>
+                                          <h5>(Savings)</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
                                           <h5><i class="fa fa-inr"></i> {% for x in savings %}{{x.savings|floatformat:2}}{% endfor %}</h5>
                                           
                                        </div>
                                        <div class="col-lg-3 col-md-12 col-sm-12">
-                                          <h4><i class="fa fa-dashcube"></i> Total PV (Current Month) </h4>
+                                          <h5><i class="fa fa-dashcube"></i> Total PV</h5>
+                                          <h5>(Current Month)</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
-                                          <h5><i class=""></i>{{total_pv.pv|floatformat:0}} PV</h5>
+                                          <h5><i class=""></i>{{total_pv.pv|floatformat:2}} PV</h5>
                                           
                                        </div>
                                        <div class="col-lg-3 col-md-12 col-sm-12">
-                                          <h4><i class="fa fa-dashcube"></i> Total PV (Current Year) </h4>
+                                          <h5><i class="fa fa-dashcube"></i> Total PV</h5>
+                                          <h5>(Current Year)</h5>
                                           <hr style="border-width:5px;border-color:green;border-radius:20px;margin-bottm:10px;">
                                           <h5><i class=""></i> 
                                              {% for x in year_pv %}
